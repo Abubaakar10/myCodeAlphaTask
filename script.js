@@ -45,59 +45,36 @@ nextBtn.addEventListener("click", () => {
 });
 
 
-
-/* =========================
-   PREVIOUS IMAGE
-========================= */
-
 prevBtn.addEventListener("click", () => {
-
-    // Move backwards
     currentIndex--;
 
-    // If below 0,
-    // go to last image
     if (currentIndex < 0) {
-
         currentIndex = images.length - 1;
     }
 
-    // Update displayed image
     lightboxImage.src = images[currentIndex].src;
 
 });
 
 
-
-/* =========================
-   FILTERING IMAGES
-========================= */
-
-// Loop through filter buttons
 filterButtons.forEach((button) => {
 
-    // Add click event
     button.addEventListener("click", () => {
 
-        // Get category from button
         const filter = button.dataset.filter;
 
-        // Loop through image cards
         imageCards.forEach((card) => {
 
-            // Show all images
             if (filter === "all") {
 
                 card.style.display = "block";
             }
 
-            // Show matching category
             else if (card.classList.contains(filter)) {
 
                 card.style.display = "block";
             }
 
-            // Hide non-matching category
             else {
 
                 card.style.display = "none";
