@@ -1,0 +1,110 @@
+const images = document.querySelectorAll(".image-card img");
+
+const lightbox = document.querySelector(".lightbox");
+
+const lightboxImage = document.querySelector(".lightbox-image");
+
+const nextBtn = document.querySelector(".next-btn");
+const prevBtn = document.querySelector(".prev-btn");
+
+const closeBtn = document.querySelector(".close-btn");
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+const imageCards = document.querySelectorAll(".image-card");
+
+
+let currentIndex = 0;
+
+
+images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+
+        lightbox.style.display = "flex";
+        lightboxImage.src = img.src;
+        currentIndex = index;
+    });
+});
+
+
+closeBtn.addEventListener("click", () => {
+
+    lightbox.style.display = "none";
+
+});
+
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+
+    if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+
+    lightboxImage.src = images[currentIndex].src;
+});
+
+
+
+/* =========================
+   PREVIOUS IMAGE
+========================= */
+
+prevBtn.addEventListener("click", () => {
+
+    // Move backwards
+    currentIndex--;
+
+    // If below 0,
+    // go to last image
+    if (currentIndex < 0) {
+
+        currentIndex = images.length - 1;
+    }
+
+    // Update displayed image
+    lightboxImage.src = images[currentIndex].src;
+
+});
+
+
+
+/* =========================
+   FILTERING IMAGES
+========================= */
+
+// Loop through filter buttons
+filterButtons.forEach((button) => {
+
+    // Add click event
+    button.addEventListener("click", () => {
+
+        // Get category from button
+        const filter = button.dataset.filter;
+
+        // Loop through image cards
+        imageCards.forEach((card) => {
+
+            // Show all images
+            if (filter === "all") {
+
+                card.style.display = "block";
+            }
+
+            // Show matching category
+            else if (card.classList.contains(filter)) {
+
+                card.style.display = "block";
+            }
+
+            // Hide non-matching category
+            else {
+
+                card.style.display = "none";
+            }
+
+        });
+
+    });
+
+});
